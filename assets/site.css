@@ -156,3 +156,5 @@ main.page a:hover { color: var(--lav); border-bottom-color: var(--lav); }
 main.page strong { color: var(--text); font-weight: 600; }
 main.page em { color: rgba(232, 234, 244, .92); }
 @media (max-width: 600px) { main.page { padding: 32px 14px 48px; } }
+
+main.page h1 .wm-inline { height: 0.72em; width: auto; vertical-align: -0.02em; margin: 0 .06em; }
