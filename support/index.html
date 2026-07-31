@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Support — elbow</title>
+<meta name="description" content="Support for elbow. Having trouble with the app? We're here to help — email hello@byaga.dev.">
+<link rel="canonical" href="https://elbow-app.com/support/">
+<meta property="og:title" content="Support — elbow">
+<meta property="og:description" content="Having trouble with elbow? We're here to help.">
+<meta property="og:url" content="https://elbow-app.com/support/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="elbow">
+<meta property="og:image" content="https://elbow-app.com/assets/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#0E1220">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/site.css">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text);
+    min-height: 100vh; display: flex; flex-direction: column;
+    position: relative; overflow-x: hidden; -webkit-font-smoothing: antialiased;
+  }
+  body::before {
+    content: ''; position: fixed; inset: 0; pointer-events: none; z-index: 0;
+    background:
+      radial-gradient(ellipse at 12% -5%, rgba(143,168,255,0.08) 0%, transparent 55%),
+      radial-gradient(ellipse at 88% 8%, rgba(167,139,250,0.07) 0%, transparent 50%);
+  }
+  .contact-card {
+    background: linear-gradient(135deg, rgba(143,168,255,.08), rgba(167,139,250,.06));
+    border: 1px solid var(--line-strong); border-radius: 16px;
+    padding: 26px 26px; margin: 6px 0 24px;
+  }
+  .contact-card .lbl { font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--lav); font-weight: 600; margin-bottom: 8px; }
+  .contact-card a.email {
+    font-family: 'Sora', sans-serif; font-size: 1.3rem; font-weight: 700; letter-spacing: -.02em;
+    color: var(--peri); text-decoration: none; border: none;
+  }
+  .contact-card a.email:hover { color: var(--lav); }
+  .contact-card .note { margin-top: 8px; color: var(--muted); font-size: .9rem; }
+  details { border-top: 1px solid var(--line); padding: 16px 2px; }
+  details summary {
+    cursor: pointer; list-style: none; font-family: 'Sora', sans-serif; font-weight: 600;
+    font-size: 1rem; color: var(--text); display: flex; justify-content: space-between; align-items: center; gap: 12px;
+  }
+  details summary::-webkit-details-marker { display: none; }
+  details summary::after { content: '+'; color: var(--peri); font-size: 1.3rem; font-weight: 400; transition: transform .2s; }
+  details[open] summary::after { transform: rotate(45deg); }
+  details p { margin-top: 12px; margin-bottom: 0; }
+</style>
+</head>
+<body>
+
+<nav class="site-nav">
+  <div class="site-nav-in">
+    <a href="/" class="btn btn-ghost btn-sm"><span class="arrow">←</span> Back</a>
+    <a href="/" class="logo"><img src="/assets/logo-wordmark.png" alt="elbow"></a>
+    <div class="spacer"></div>
+    <a href="/privacy/" class="btn btn-ghost btn-sm">Privacy</a>
+  </div>
+</nav>
+
+<main class="page">
+  <h1>Support</h1>
+  <span class="updated">Having trouble with elbow? We're here to help.</span>
+  <hr>
+
+  <div class="contact-card">
+    <div class="lbl">Email us</div>
+    <a href="mailto:hello@byaga.dev" class="email">hello@byaga.dev</a>
+    <p class="note">We read every message and aim to reply within 2 business days. Telling us your iPhone model and iOS version helps us help you faster.</p>
+  </div>
+
+  <h2>Frequently asked</h2>
+
+  <details>
+    <summary>Does elbow work across my devices?</summary>
+    <p>Yes. elbow syncs through your personal iCloud account, so your rooms, tasks, and cleaning history stay up to date across your iPhones and iPad, as long as you're signed into the same Apple account with iCloud Drive enabled.</p>
+  </details>
+
+  <details>
+    <summary>Do you collect any of my data?</summary>
+    <p>No. elbow has no accounts, analytics, or trackers. Everything you enter lives on your device and in your own private iCloud — we can't see it. You can read the full details in our <a href="/privacy/">Privacy Policy</a>.</p>
+  </details>
+
+  <details>
+    <summary>How does household sharing work?</summary>
+    <p>Sharing uses Apple's built-in iCloud sharing. You invite the people you want, and everyone in the shared home sees the same tasks and what's been done. You can stop sharing at any time. Household sharing is a Pro feature.</p>
+  </details>
+
+  <details>
+    <summary>How do I manage or cancel a subscription?</summary>
+    <p>Subscriptions are handled by Apple. Open the Settings app on your iPhone, tap your name, then Subscriptions, and choose elbow to change or cancel. A lifetime purchase is one-time and never renews.</p>
+  </details>
+
+  <details>
+    <summary>I think I lost some data — can you help?</summary>
+    <p>Because your data lives in your own iCloud rather than on our servers, the first thing to check is that you're signed into the right Apple account with iCloud enabled. If something still looks wrong, email us at <a href="mailto:hello@byaga.dev">hello@byaga.dev</a> and we'll do our best to help.</p>
+  </details>
+
+  <details>
+    <summary>I have a feature idea or found a bug.</summary>
+    <p>We'd genuinely love to hear it. Drop us a note at <a href="mailto:hello@byaga.dev">hello@byaga.dev</a> — feedback from people using elbow shapes what we build next.</p>
+  </details>
+</main>
+
+<footer class="site-footer">
+  <div class="site-footer-in">
+    <div class="fgrid">
+      <div>
+        <a href="/" class="flogo"><img src="/assets/logo-wordmark.png" alt="elbow"></a>
+        <div class="built">A calmer way to keep your home.</div>
+        <div class="built"><a href="https://byaga.dev" target="_blank" rel="noopener">built by byaga.dev ↗</a></div>
+      </div>
+      <div>
+        <h5>Product</h5>
+        <a href="/#features">Features</a>
+        <a href="/#get">Get elbow</a>
+        <a href="/about/">About</a>
+      </div>
+      <div>
+        <h5>Legal</h5>
+        <a href="/privacy/">Privacy policy</a>
+        <a href="/terms/">Terms of use</a>
+        <a href="/support/">Support</a>
+      </div>
+    </div>
+    <p class="disc">elbow is an independent app for keeping your home clean and organised. © 2026 Aga Drapinska-Tonge. All rights reserved.</p>
+  </div>
+</footer>
+
+</body>
+</html>

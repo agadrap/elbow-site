@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 1200px; height: 630px; }
+  body {
+    font-family: 'DM Sans', sans-serif; background: #0E1220; color: #E8EAF4;
+    position: relative; overflow: hidden;
+    display: flex; flex-direction: column; justify-content: center; padding: 0 88px;
+  }
+  body::before {
+    content: ''; position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse at 8% -10%, rgba(143,168,255,0.20) 0%, transparent 52%),
+      radial-gradient(ellipse at 96% 110%, rgba(167,139,250,0.16) 0%, transparent 52%);
+  }
+  .in { position: relative; z-index: 1; }
+  .brand { display: flex; align-items: center; gap: 26px; margin-bottom: 44px; }
+  .brand .appicon { width: 96px; height: 96px; border-radius: 22px; box-shadow: 0 14px 40px rgba(143,168,255,.30); }
+  .brand .wm { height: 84px; }
+  h1 {
+    font-family: 'Sora', sans-serif; font-weight: 800; font-size: 72px;
+    line-height: 1.05; letter-spacing: -.035em; max-width: 17ch; margin-bottom: 24px;
+  }
+  h1 .grad { background: linear-gradient(120deg, #8FA8FF, #A78BFA); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  p { font-size: 29px; font-weight: 300; color: #8892B0; }
+  .url { position: absolute; z-index: 1; bottom: 52px; left: 88px; font-family: 'Sora', sans-serif; font-weight: 600; font-size: 23px; color: #8FA8FF; }
+</style>
+</head>
+<body>
+  <div class="in">
+    <div class="brand">
+      <img class="appicon" src="app-icon-1024.png" alt="">
+      <img class="wm" src="logo-wordmark.png" alt="elbow">
+    </div>
+    <h1>A cleaner home,<br><span class="grad">without the mental load</span></h1>
+    <p>Smart cleaning routines · Appliance care · Stain guides</p>
+  </div>
+  <div class="url">elbow-app.com</div>
+</body>
+</html>

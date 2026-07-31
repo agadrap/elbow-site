@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>elbow — a cleaner home, without the mental load</title>
+<meta name="description" content="elbow keeps your home clean room by room: smart cleaning routines, step-by-step appliance care, stain rescue guides, and household sharing. Private by design — your data stays in your iCloud.">
+<link rel="canonical" href="https://elbow-app.com/">
+<meta property="og:title" content="elbow — a cleaner home, without the mental load">
+<meta property="og:description" content="Smart cleaning routines, appliance care, and stain guides that keep your whole home on track. Private by design.">
+<meta property="og:url" content="https://elbow-app.com/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="elbow">
+<meta property="og:image" content="https://elbow-app.com/assets/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#0E1220">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/site.css">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg); color: var(--text);
+    min-height: 100vh; display: flex; flex-direction: column;
+    position: relative; overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+  body::before {
+    content: ''; position: fixed; inset: 0; pointer-events: none; z-index: 0;
+    background:
+      radial-gradient(ellipse at 12% -5%, rgba(143,168,255,0.10) 0%, transparent 55%),
+      radial-gradient(ellipse at 88% 8%, rgba(167,139,250,0.10) 0%, transparent 50%);
+  }
+  .wrap { position: relative; z-index: 1; width: 100%; max-width: var(--site-maxw); margin: 0 auto; padding: 0 28px; }
+
+  /* HERO */
+  .hero { text-align: center; padding: 82px 0 60px; }
+  .badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-size: 12.5px; font-weight: 600; letter-spacing: .01em;
+    color: var(--peri);
+    background: rgba(143,168,255,.10);
+    border: 1px solid var(--line-strong);
+    padding: 7px 15px; border-radius: 999px; margin-bottom: 26px;
+  }
+  .badge .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--green); box-shadow: 0 0 10px var(--green); }
+  .hero h1 {
+    font-family: 'Sora', sans-serif; font-weight: 800;
+    font-size: clamp(2.1rem, 5.4vw, 3.7rem); line-height: 1.06;
+    letter-spacing: -.035em; margin: 0 auto 20px; max-width: 15ch;
+  }
+  .hero h1 .grad {
+    background: linear-gradient(120deg, var(--peri), var(--lav));
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  .hero p.sub {
+    font-size: clamp(1.02rem, 2vw, 1.22rem); font-weight: 300;
+    color: var(--muted); max-width: 40ch; margin: 0 auto 34px; line-height: 1.6;
+  }
+  .cta-row { display: flex; gap: 14px; justify-content: center; align-items: center; flex-wrap: wrap; }
+  .btn-lg {
+    display: inline-flex; align-items: center; gap: 10px;
+    font-family: inherit; font-weight: 600; font-size: 15.5px;
+    padding: 15px 26px; border-radius: 13px; text-decoration: none; transition: .2s;
+    border: 1px solid transparent; cursor: pointer;
+  }
+  .btn-primary {
+    background: linear-gradient(180deg, var(--peri), var(--peri-dim)); color: #0b1020;
+    box-shadow: 0 8px 26px rgba(143,168,255,.30);
+  }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 12px 34px rgba(143,168,255,.42); }
+  .btn-secondary { border-color: var(--line-strong); color: var(--text); background: rgba(255,255,255,.02); }
+  .btn-secondary:hover { border-color: var(--peri); color: var(--peri); }
+  .hero .fineprint { margin-top: 16px; font-size: 12.5px; color: var(--faint); }
+
+  /* SECTION */
+  section { position: relative; z-index: 1; padding: 46px 0; }
+  .eyebrow {
+    text-align: center; font-size: 11px; letter-spacing: .18em; text-transform: uppercase;
+    color: var(--lav); font-weight: 600; margin-bottom: 12px;
+  }
+  .sec-title {
+    text-align: center; font-family: 'Sora', sans-serif; font-weight: 700;
+    font-size: clamp(1.5rem, 3.4vw, 2.15rem); letter-spacing: -.025em; margin-bottom: 12px;
+  }
+  .sec-lead { text-align: center; color: var(--muted); max-width: 46ch; margin: 0 auto 44px; font-weight: 300; line-height: 1.6; }
+
+  /* FEATURE GRID */
+  .features { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+  .card {
+    background: linear-gradient(180deg, var(--card), rgba(19,23,40,.55));
+    border: 1px solid var(--line); border-radius: 18px; padding: 26px 24px;
+    transition: transform .2s, border-color .2s;
+  }
+  .card:hover { transform: translateY(-3px); border-color: var(--line-strong); }
+  .card .ico {
+    width: 46px; height: 46px; border-radius: 13px; display: grid; place-items: center;
+    font-size: 22px; margin-bottom: 16px;
+    background: rgba(143,168,255,.10); border: 1px solid var(--line-strong);
+  }
+  .card h3 { font-family: 'Sora', sans-serif; font-size: 1.08rem; font-weight: 600; letter-spacing: -.01em; margin-bottom: 8px; }
+  .card p { color: var(--muted); font-size: .92rem; line-height: 1.62; font-weight: 300; }
+  .card .tag {
+    display: inline-block; margin-top: 12px; font-size: 10.5px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase;
+    color: var(--lav); background: rgba(167,139,250,.10); border: 1px solid rgba(167,139,250,.28);
+    padding: 3px 9px; border-radius: 999px;
+  }
+
+  /* STEPS */
+  .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; counter-reset: step; }
+  .step { padding: 8px 6px; }
+  .step .n {
+    font-family: 'Sora', sans-serif; font-weight: 800; font-size: 1rem;
+    width: 38px; height: 38px; border-radius: 11px; display: grid; place-items: center; margin-bottom: 14px;
+    color: var(--peri); background: rgba(143,168,255,.10); border: 1px solid var(--line-strong);
+  }
+  .step h3 { font-family: 'Sora', sans-serif; font-size: 1.02rem; font-weight: 600; margin-bottom: 7px; }
+  .step p { color: var(--muted); font-size: .92rem; line-height: 1.6; font-weight: 300; }
+
+  /* PRIVACY STRIP */
+  .privacy-strip {
+    background: linear-gradient(135deg, rgba(93,202,165,.08), rgba(143,168,255,.06));
+    border: 1px solid var(--line); border-radius: 20px; padding: 40px 34px; text-align: center;
+  }
+  .privacy-strip .ico { font-size: 30px; margin-bottom: 14px; }
+  .privacy-strip h2 { font-family: 'Sora', sans-serif; font-weight: 700; font-size: clamp(1.35rem, 3vw, 1.9rem); letter-spacing: -.02em; margin-bottom: 12px; }
+  .privacy-strip p { color: var(--muted); max-width: 52ch; margin: 0 auto; font-weight: 300; line-height: 1.65; }
+
+  /* FINAL CTA */
+  .final-cta { text-align: center; padding: 66px 0 30px; }
+  .final-cta h2 { font-family: 'Sora', sans-serif; font-weight: 800; font-size: clamp(1.8rem, 4vw, 2.7rem); letter-spacing: -.03em; margin-bottom: 16px; }
+  .final-cta p { color: var(--muted); margin-bottom: 30px; font-weight: 300; }
+
+  @media (max-width: 860px) {
+    .features, .steps { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 620px) {
+    .features, .steps { grid-template-columns: 1fr; }
+    .hero { padding: 60px 0 44px; }
+    .wrap { padding: 0 20px; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="site-nav">
+  <div class="site-nav-in">
+    <a href="/" class="logo"><img src="/assets/logo-wordmark.png" alt="elbow"></a>
+    <div class="spacer"></div>
+    <a href="#features" class="btn btn-ghost btn-sm">Features</a>
+    <a href="/support/" class="btn btn-ghost btn-sm">Support</a>
+    <a href="#get" class="btn btn-accent">Get elbow</a>
+  </div>
+</nav>
+
+<div class="wrap">
+  <header class="hero">
+    <span class="badge"><span class="dot"></span> Coming soon to iPhone</span>
+    <h1>A cleaner home, <span class="grad">without the mental load</span></h1>
+    <p class="sub">elbow remembers what needs cleaning, when — so you don't have to. Room-by-room routines, appliance care, and stain rescue in one calm little app.</p>
+    <div class="cta-row">
+      <a href="#get" class="btn-lg btn-primary">Get elbow </a>
+      <a href="#features" class="btn-lg btn-secondary">See how it works</a>
+    </div>
+    <p class="fineprint">Private by design · No account needed · Syncs with your iCloud</p>
+  </header>
+</div>
+
+<section id="features">
+  <div class="wrap">
+    <p class="eyebrow">What it does</p>
+    <h2 class="sec-title">Everything your home needs, on schedule</h2>
+    <p class="sec-lead">A gentle system that turns "I should really clean that" into a plan that actually happens.</p>
+    <div class="features">
+      <div class="card">
+        <div class="ico">🧹</div>
+        <h3>Room-by-room routines</h3>
+        <p>Set up the rooms you have and elbow builds a cleaning rhythm for each one — daily, weekly, seasonal — and quietly resurfaces tasks the moment they're due.</p>
+      </div>
+      <div class="card">
+        <div class="ico">🔧</div>
+        <h3>Appliance care, step by step</h3>
+        <p>Descale the kettle, clean the washing machine, clear the extractor filter — with clear steps, why it matters, and a "last cleaned" note so nothing slips for months.</p>
+      </div>
+      <div class="card">
+        <div class="ico">🫧</div>
+        <h3>Stain rescue guides</h3>
+        <p>Red wine on the carpet, grease on a shirt, marker on the wall — quick, practical methods you can follow in the moment, without a frantic web search.</p>
+      </div>
+      <div class="card">
+        <div class="ico">🏡</div>
+        <h3>Share with your household</h3>
+        <p>Bring your partner or flatmates into the same home. Everyone sees what's done and what's next, so the work stops living in one person's head.</p>
+        <span class="tag">Pro</span>
+      </div>
+      <div class="card">
+        <div class="ico">📊</div>
+        <h3>See your home at a glance</h3>
+        <p>A dashboard shows what's due today or across the week, and each room's health at a glance — so a busy week never turns into a backlog.</p>
+      </div>
+      <div class="card">
+        <div class="ico">🌙</div>
+        <h3>Life-proof by design</h3>
+        <p>Heading away? Vacation mode pauses the nudges. Widgets keep today's tasks on your home screen. elbow bends around your life, not the other way round.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <p class="eyebrow">How it works</p>
+    <h2 class="sec-title">Set it up once, coast from there</h2>
+    <p class="sec-lead">A few minutes to tell elbow about your home is all it takes.</p>
+    <div class="steps">
+      <div class="step">
+        <div class="n">1</div>
+        <h3>Pick your rooms</h3>
+        <p>Choose the spaces you actually have. elbow fills each one with sensible cleaning tasks you can tweak, add to, or hide.</p>
+      </div>
+      <div class="step">
+        <div class="n">2</div>
+        <h3>Let it keep time</h3>
+        <p>Tick things off as you go. elbow handles the scheduling — spacing each task out and bringing it back exactly when it's due again.</p>
+      </div>
+      <div class="step">
+        <div class="n">3</div>
+        <h3>Open to a clear plan</h3>
+        <p>Every day starts with a short, doable list instead of a vague sense that everything needs doing. That's the whole idea.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="privacy-strip">
+      <div class="ico">🔒</div>
+      <h2>Your home is nobody's business but yours</h2>
+      <p>elbow has no accounts, no analytics, and no trackers. Your rooms, tasks, and history live only on your device and in your own private iCloud — we can't see any of it, and we never sell or share a thing.</p>
+    </div>
+  </div>
+</section>
+
+<section id="get">
+  <div class="wrap">
+    <div class="final-cta">
+      <h2>A little elbow grease,<br>minus the guesswork</h2>
+      <p>elbow is coming soon to the App Store for iPhone. Questions in the meantime? We'd love to hear from you.</p>
+      <div class="cta-row">
+        <span class="btn-lg btn-primary" style="cursor:default;">Coming soon to the App Store</span>
+        <a href="/support/" class="btn-lg btn-secondary">Contact us</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="site-footer-in">
+    <div class="fgrid">
+      <div>
+        <a href="/" class="flogo"><img src="/assets/logo-wordmark.png" alt="elbow"></a>
+        <div class="built">A calmer way to keep your home.</div>
+        <div class="built"><a href="https://byaga.dev" target="_blank" rel="noopener">built by byaga.dev ↗</a></div>
+      </div>
+      <div>
+        <h5>Product</h5>
+        <a href="/#features">Features</a>
+        <a href="/#get">Get elbow</a>
+        <a href="/about/">About</a>
+      </div>
+      <div>
+        <h5>Legal</h5>
+        <a href="/privacy/">Privacy policy</a>
+        <a href="/terms/">Terms of use</a>
+        <a href="/support/">Support</a>
+      </div>
+    </div>
+    <p class="disc">elbow is an independent app for keeping your home clean and organised. Cleaning and appliance guidance is general in nature — always follow manufacturers' instructions, which take precedence. © 2026 Aga Drapinska-Tonge. All rights reserved.</p>
+  </div>
+</footer>
+
+</body>
+</html>

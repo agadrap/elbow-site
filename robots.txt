@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://elbow-app.com/sitemap.xml
