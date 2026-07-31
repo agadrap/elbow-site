@@ -104,7 +104,7 @@
   .card:hover { transform: translateY(-3px); border-color: var(--line-strong); }
   .card .ico {
     width: 46px; height: 46px; border-radius: 13px; display: grid; place-items: center;
-    font-size: 22px; margin-bottom: 16px;
+    font-size: 22px; margin-bottom: 16px; color: var(--peri);
     background: rgba(143,168,255,.10); border: 1px solid var(--line-strong);
   }
   .card h3 { font-family: 'Sora', sans-serif; font-size: 1.08rem; font-weight: 600; letter-spacing: -.01em; margin-bottom: 8px; }
@@ -131,7 +131,7 @@
     background: linear-gradient(135deg, rgba(93,202,165,.08), rgba(143,168,255,.06));
     border: 1px solid var(--line); border-radius: 20px; padding: 40px 34px; text-align: center;
   }
-  .privacy-strip .ico { font-size: 30px; margin-bottom: 14px; }
+  .privacy-strip .ico { font-size: 30px; margin-bottom: 14px; color: var(--peri); }
   .privacy-strip h2 { font-family: 'Sora', sans-serif; font-weight: 700; font-size: clamp(1.35rem, 3vw, 1.9rem); letter-spacing: -.02em; margin-bottom: 12px; }
   .privacy-strip p { color: var(--muted); max-width: 52ch; margin: 0 auto; font-weight: 300; line-height: 1.65; }
 
@@ -148,6 +148,9 @@
     .hero { padding: 60px 0 44px; }
     .wrap { padding: 0 20px; }
   }
+  .card .ico svg { width: 23px; height: 23px; }
+  .privacy-strip .ico svg { width: 34px; height: 34px; }
+  .final-cta h2 .wm-inline { height: 0.66em; width: auto; vertical-align: -0.02em; margin: 0 .07em; }
 </style>
 </head>
 <body>
@@ -182,33 +185,33 @@
     <p class="sec-lead">A gentle system that turns "I should really clean that" into a plan that actually happens.</p>
     <div class="features">
       <div class="card">
-        <div class="ico">🧹</div>
+        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11.5 12 5l8 6.5"/><path d="M6 10.5V19h12v-8.5"/><path d="M10 19v-5h4v5"/></svg></div>
         <h3>Room-by-room routines</h3>
         <p>Set up the rooms you have and elbow builds a cleaning rhythm for each one — daily, weekly, seasonal — and quietly resurfaces tasks the moment they're due.</p>
       </div>
       <div class="card">
-        <div class="ico">🔧</div>
+        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6.5 5.4 8 8 5.2"/><path d="M4 12.5 5.4 14 8 11.2"/><path d="M4 18.5 5.4 20 8 17.2"/><path d="M11 6.5h9"/><path d="M11 12.5h9"/><path d="M11 18.5h9"/></svg></div>
         <h3>Appliance care, step by step</h3>
         <p>Descale the kettle, clean the washing machine, clear the extractor filter — with clear steps, why it matters, and a "last cleaned" note so nothing slips for months.</p>
       </div>
       <div class="card">
-        <div class="ico">🫧</div>
+        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.6c3 3.8 5.4 6.5 5.4 9.4a5.4 5.4 0 0 1-10.8 0c0-2.9 2.4-5.6 5.4-9.4Z"/><path d="M9.6 13.6a2.5 2.5 0 0 0 2 2.3"/></svg></div>
         <h3>Stain rescue guides</h3>
         <p>Red wine on the carpet, grease on a shirt, marker on the wall — quick, practical methods you can follow in the moment, without a frantic web search.</p>
       </div>
       <div class="card">
-        <div class="ico">🏡</div>
+        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.1"/><path d="M3.6 19.5a5.4 5.4 0 0 1 10.8 0"/><path d="M16.2 5.2a3.1 3.1 0 0 1 0 5.6"/><path d="M17.6 14.3a5.4 5.4 0 0 1 2.9 4.7"/></svg></div>
         <h3>Share with your household</h3>
         <p>Bring your partner or flatmates into the same home. Everyone sees what's done and what's next, so the work stops living in one person's head.</p>
         <span class="tag">Pro</span>
       </div>
       <div class="card">
-        <div class="ico">📊</div>
+        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="3.5" width="7" height="7.5" rx="1.6"/><rect x="13.5" y="3.5" width="7" height="4.5" rx="1.6"/><rect x="13.5" y="11" width="7" height="9.5" rx="1.6"/><rect x="3.5" y="13.5" width="7" height="7" rx="1.6"/></svg></div>
         <h3>See your home at a glance</h3>
         <p>A dashboard shows what's due today or across the week, and each room's health at a glance — so a busy week never turns into a backlog.</p>
       </div>
       <div class="card">
-        <div class="ico">🌙</div>
+        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13.6A7.6 7.6 0 1 1 10.1 4.2 6 6 0 0 0 20 13.6Z"/></svg></div>
         <h3>Life-proof by design</h3>
         <p>Heading away? Vacation mode pauses the nudges. Widgets keep today's tasks on your home screen. elbow bends around your life, not the other way round.</p>
       </div>
@@ -244,7 +247,7 @@
 <section>
   <div class="wrap">
     <div class="privacy-strip">
-      <div class="ico">🔒</div>
+      <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4.5" y="10.5" width="15" height="10" rx="2.2"/><path d="M8 10.5V7a4 4 0 0 1 8 0v3.5"/><path d="M12 14.6v2.4"/></svg></div>
       <h2>Your home is nobody's business but yours</h2>
       <p>elbow has no accounts, no analytics, and no trackers. Your rooms, tasks, and history live only on your device and in your own private iCloud — we can't see any of it, and we never sell or share a thing.</p>
     </div>
@@ -254,7 +257,7 @@
 <section id="get">
   <div class="wrap">
     <div class="final-cta">
-      <h2>A little elbow grease,<br>minus the guesswork</h2>
+      <h2>A little <img class="wm-inline" src="/assets/logo-wordmark.png" alt="elbow"> grease,<br>minus the guesswork</h2>
       <p>elbow is coming soon to the App Store for iPhone. Questions in the meantime? We'd love to hear from you.</p>
       <div class="cta-row">
         <span class="btn-lg btn-primary" style="cursor:default;">Coming soon to the App Store</span>
