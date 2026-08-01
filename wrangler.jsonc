@@ -1,0 +1,10 @@
+{
+  // Cloudflare Worker serving the elbow marketing site as static assets.
+  // No server code — just the static files in this repo.
+  // Clean URLs (/privacy/ -> /privacy/index.html) work via the default asset handling.
+  "name": "elbow-site",
+  "compatibility_date": "2025-01-01",
+  "assets": {
+    "directory": "./"
+  }
+}
