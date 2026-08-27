@@ -2,43 +2,123 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<!-- Source for assets/og-image.png — render at 1200x630.
+     See README "Regenerating the share card" for the one-liner. -->
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
   html, body { width: 1200px; height: 630px; }
   body {
-    font-family: 'DM Sans', sans-serif; background: #0E1220; color: #E8EAF4;
+    font-family: 'DM Sans', sans-serif;
+    background: #0E1220; color: #E8EAF4;
     position: relative; overflow: hidden;
-    display: flex; flex-direction: column; justify-content: center; padding: 0 88px;
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 0 76px 84px;
   }
+
+  /* ambient wash */
   body::before {
     content: ''; position: absolute; inset: 0;
     background:
-      radial-gradient(ellipse at 8% -10%, rgba(143,168,255,0.20) 0%, transparent 52%),
-      radial-gradient(ellipse at 96% 110%, rgba(167,139,250,0.16) 0%, transparent 52%);
+      radial-gradient(ellipse 620px 460px at 4% -12%, rgba(143,168,255,0.22) 0%, transparent 60%),
+      radial-gradient(ellipse 700px 520px at 78% 118%, rgba(167,139,250,0.20) 0%, transparent 58%),
+      radial-gradient(ellipse 520px 520px at 74% 30%, rgba(143,168,255,0.14) 0%, transparent 62%);
   }
-  .in { position: relative; z-index: 1; }
-  .brand { display: flex; align-items: center; gap: 26px; margin-bottom: 44px; }
-  .brand .appicon { width: 96px; height: 96px; border-radius: 22px; box-shadow: 0 14px 40px rgba(143,168,255,.30); }
-  .brand .wm { height: 84px; }
+  /* hairline grid, barely there — reads as "system", not decoration */
+  body::after {
+    content: ''; position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(143,168,255,.045) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(143,168,255,.045) 1px, transparent 1px);
+    background-size: 60px 60px;
+    mask-image: radial-gradient(ellipse 900px 620px at 20% 40%, #000 0%, transparent 72%);
+    -webkit-mask-image: radial-gradient(ellipse 900px 620px at 20% 40%, #000 0%, transparent 72%);
+  }
+
+  .in { position: relative; z-index: 3; width: 560px; }
+
+  .brand { display: flex; align-items: center; gap: 22px; margin-bottom: 38px; }
+  .brand .appicon {
+    width: 76px; height: 76px; border-radius: 18px;
+    box-shadow: 0 12px 34px rgba(143,168,255,.34);
+  }
+  .brand .wm { height: 60px; width: auto; }
+
   h1 {
-    font-family: 'Sora', sans-serif; font-weight: 800; font-size: 72px;
-    line-height: 1.05; letter-spacing: -.035em; max-width: 17ch; margin-bottom: 24px;
+    font-family: 'Sora', sans-serif; font-weight: 800; font-size: 58px;
+    line-height: 1.06; letter-spacing: -.038em; margin-bottom: 22px;
   }
-  h1 .grad { background: linear-gradient(120deg, #8FA8FF, #A78BFA); -webkit-background-clip: text; background-clip: text; color: transparent; }
-  p { font-size: 29px; font-weight: 300; color: #8892B0; }
-  .url { position: absolute; z-index: 1; bottom: 52px; left: 88px; font-family: 'Sora', sans-serif; font-weight: 600; font-size: 23px; color: #8FA8FF; }
+  h1 .grad {
+    background: linear-gradient(115deg, #8FA8FF 10%, #A78BFA 90%);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  .sub { font-size: 24px; font-weight: 300; color: #98A2C0; line-height: 1.45; }
+
+  .url {
+    position: absolute; z-index: 3; bottom: 46px; left: 76px;
+    display: flex; align-items: center; gap: 11px;
+    font-family: 'Sora', sans-serif; font-weight: 600; font-size: 22px; color: #8FA8FF;
+  }
+  .url .dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: #5DCAA5; box-shadow: 0 0 12px rgba(93,202,165,.9);
+  }
+
+  /* ---- phone cluster ---- */
+  .stage { position: absolute; inset: 0; z-index: 2; }
+  .glow {
+    position: absolute; left: 610px; top: 40px; width: 620px; height: 560px;
+    background: radial-gradient(ellipse at center, rgba(143,168,255,.30) 0%, transparent 66%);
+    filter: blur(14px);
+  }
+  .phone { position: absolute; border-radius: 36px; background: #05070E;
+    border: 3px solid rgba(160,182,255,.30);
+    box-shadow: 0 34px 80px rgba(0,0,0,.62), 0 0 70px rgba(143,168,255,.16);
+  }
+  .phone img { display: block; width: 100%; height: auto; border-radius: 33px; }
+  /* glass sheen */
+  .phone::after {
+    content: ''; position: absolute; inset: 0; border-radius: 33px;
+    background: linear-gradient(128deg, rgba(255,255,255,.14) 0%, rgba(255,255,255,.03) 26%, transparent 52%);
+    pointer-events: none;
+  }
+
+  .p-left  { width: 244px; left: 600px;  top: 128px; transform: rotate(-9deg); z-index: 1; }
+  .p-mid   { width: 278px; left: 830px;  top: 54px;  transform: rotate(-2deg); z-index: 3; }
+  .p-right { width: 244px; left: 1012px; top: 146px; transform: rotate(7deg);  z-index: 2; }
+
+  .p-left::before, .p-right::before {
+    content: ''; position: absolute; inset: 0; border-radius: 33px; z-index: 2;
+    background: rgba(14,18,32,.34);
+  }
+
+  /* bottom fade so the bleeding phones dissolve into the ground */
+  .floor {
+    position: absolute; left: 0; right: 0; bottom: 0; height: 150px; z-index: 4;
+    background: linear-gradient(180deg, rgba(14,18,32,0) 0%, rgba(14,18,32,.86) 62%, #0E1220 100%);
+  }
 </style>
 </head>
 <body>
+
+  <div class="stage">
+    <div class="glow"></div>
+    <div class="phone p-left"><img src="screen-rooms.webp" alt=""></div>
+    <div class="phone p-right"><img src="screen-stains.webp" alt=""></div>
+    <div class="phone p-mid"><img src="screen-dashboard.webp" alt=""></div>
+  </div>
+  <div class="floor"></div>
+
   <div class="in">
     <div class="brand">
       <img class="appicon" src="app-icon-1024.png" alt="">
       <img class="wm" src="logo-wordmark.png" alt="elbow">
     </div>
-    <h1>A cleaner home,<br><span class="grad">without the mental load</span></h1>
-    <p>Smart cleaning routines · Appliance care · Stain guides</p>
+    <h1>A cleaner home,<br><span class="grad">without the<br>mental load</span></h1>
+    <p class="sub">Room routines · Appliance care · Stain rescue</p>
   </div>
-  <div class="url">elbow-app.com</div>
+
+  <div class="url"><span class="dot"></span>elbow-app.com</div>
+
 </body>
 </html>

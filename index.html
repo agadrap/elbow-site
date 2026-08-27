@@ -11,9 +11,10 @@
 <meta property="og:url" content="https://elbow-app.com/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="elbow">
-<meta property="og:image" content="https://elbow-app.com/assets/og-image.png">
+<meta property="og:image" content="https://elbow-app.com/assets/og-image.png?v=2">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="elbow — a cleaner home, without the mental load. Three iPhone screens showing the daily plan, room routines and stain guides.">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#0E1220">
 <link rel="icon" href="/favicon.ico" sizes="any">
@@ -150,6 +151,101 @@
   }
   .card .ico svg { width: 23px; height: 23px; }
   .privacy-strip .ico svg { width: 34px; height: 34px; }
+
+  /* ---------------------------------------------------------------
+     INSIDE THE APP — fan showpiece + auto-advancing screen viewer
+     --------------------------------------------------------------- */
+  .inside-fan {
+    position: relative; height: 300px; max-width: 720px; margin: 0 auto 44px;
+    display: flex; align-items: flex-start; justify-content: center;
+    overflow: hidden;       /* phones are taller than the fan — clip the spill */
+    pointer-events: none;   /* decorative: never steal clicks from the controls */
+  }
+  /* Fade the clipped phones out with a mask, not a solid-colour gradient — the page
+     background is a radial wash, so fading to a flat --bg leaves a visible seam. */
+  .inside-fan {
+    -webkit-mask-image: linear-gradient(180deg, #000 0%, #000 58%, transparent 96%);
+            mask-image: linear-gradient(180deg, #000 0%, #000 58%, transparent 96%);
+  }
+  .inside-fan .inside-ph { position: absolute; top: 0; width: 168px; }
+  .inside-fan .f1 { transform: translateX(-260px) rotate(-13deg) translateY(30px); z-index: 1; opacity: .55; }
+  .inside-fan .f2 { transform: translateX(-135px) rotate(-7deg)  translateY(12px); z-index: 2; opacity: .80; }
+  .inside-fan .f3 { transform: translateX(0)      rotate(0deg);                    z-index: 3; }
+  .inside-fan .f4 { transform: translateX(135px)  rotate(7deg)   translateY(12px); z-index: 2; opacity: .80; }
+  .inside-fan .f5 { transform: translateX(260px)  rotate(13deg)  translateY(30px); z-index: 1; opacity: .55; }
+
+  /* shared phone chrome */
+  .inside-ph {
+    position: relative; border-radius: 30px; background: #05070E;
+    border: 2px solid rgba(160,182,255,.26);
+    box-shadow: 0 26px 60px rgba(0,0,0,.55), 0 0 46px rgba(143,168,255,.12);
+  }
+  .inside-ph img { display: block; width: 100%; height: auto; border-radius: 28px; }
+  .inside-ph::after {
+    content: ''; position: absolute; inset: 0; border-radius: 28px; pointer-events: none;
+    background: linear-gradient(128deg, rgba(255,255,255,.11) 0%, rgba(255,255,255,.02) 24%, transparent 50%);
+  }
+
+  /* viewer: phone + copy, all slides stacked in one grid cell so nothing jumps */
+  .inside-view {
+    display: grid; grid-template-columns: 270px 1fr; gap: 48px;
+    align-items: center; max-width: 840px; margin: 0 auto 34px;
+  }
+  .inside-shots, .inside-copies { display: grid; }
+  .inside-shots > *, .inside-copies > * { grid-area: 1 / 1; }
+  .inside-shots .inside-ph { width: 270px; }
+
+  .inside-slide {
+    opacity: 0; visibility: hidden; transition: opacity .38s ease, visibility .38s;
+  }
+  .inside-slide.is-on { opacity: 1; visibility: visible; }
+
+  .inside-label {
+    display: block; font-family: 'Sora', sans-serif; font-size: 10.5px; font-weight: 600;
+    letter-spacing: .16em; text-transform: uppercase; color: var(--peri); margin-bottom: 11px;
+  }
+  .inside-copies h3 {
+    font-family: 'Sora', sans-serif; font-size: 1.42rem; font-weight: 700;
+    letter-spacing: -.025em; margin-bottom: 12px;
+  }
+  .inside-copies p { color: var(--muted); font-size: .97rem; line-height: 1.65; font-weight: 300; max-width: 44ch; }
+
+  /* dots — the active one is a pill that fills over the 15s dwell */
+  .inside-dots { display: flex; gap: 10px; justify-content: center; align-items: center; }
+  .inside-dot {
+    position: relative; width: 10px; height: 10px; padding: 0; border: none; cursor: pointer;
+    border-radius: 999px; background: rgba(143,168,255,.26); overflow: hidden;
+    transition: width .34s cubic-bezier(.4,0,.2,1), background-color .24s;
+    -webkit-appearance: none; appearance: none;
+  }
+  .inside-dot:hover { background: rgba(143,168,255,.52); }
+  .inside-dot[aria-current="true"] { width: 38px; background: rgba(143,168,255,.24); }
+  .inside-dot .fill {
+    position: absolute; inset: 0; width: 0; border-radius: 999px;
+    background: linear-gradient(90deg, var(--peri), var(--lav));
+  }
+  .inside-dot[aria-current="true"] .fill { animation: inside-fill 15s linear forwards; }
+  .inside-dots[data-paused="true"] .fill { animation-play-state: paused; }
+  @keyframes inside-fill { from { width: 0 } to { width: 100% } }
+
+  @media (max-width: 860px) {
+    .inside-fan { height: 232px; margin-bottom: 34px; }
+    .inside-fan .inside-ph { width: 132px; }
+    .inside-fan .f1, .inside-fan .f5 { display: none; }
+    .inside-fan .f2 { transform: translateX(-104px) rotate(-8deg) translateY(14px); }
+    .inside-fan .f4 { transform: translateX(104px)  rotate(8deg)  translateY(14px); }
+    .inside-view { grid-template-columns: 1fr; justify-items: center; text-align: center; gap: 28px; }
+    .inside-shots .inside-ph { width: 244px; }
+    .inside-copies p { margin: 0 auto; }
+  }
+
+  /* respect the OS setting: no crossfade, no auto-advance, no fill sweep */
+  @media (prefers-reduced-motion: reduce) {
+    .inside-slide { transition: none; }
+    .inside-dot { transition: none; }
+    .inside-dot[aria-current="true"] .fill { animation: none; width: 100%; }
+  }
+
   .final-cta h2 .wm-inline { height: 0.66em; width: auto; vertical-align: -0.02em; margin: 0 .07em; }
 </style>
 </head>
@@ -177,6 +273,47 @@
     <p class="fineprint">Private by design · No account needed · Syncs with your iCloud</p>
   </header>
 </div>
+
+<section id="inside">
+  <div class="wrap">
+    <p class="eyebrow">Inside elbow</p>
+    <h2 class="sec-title">A look around the app</h2>
+    <p class="sec-lead">Five screens, one job each — and none of them ask you to think about scheduling.</p>
+
+    <div class="inside-fan" aria-hidden="true">
+        <div class="inside-ph f1"><img src="/assets/screen-appliances.webp" alt="" width="760" height="1652" decoding="async"></div>
+        <div class="inside-ph f2"><img src="/assets/screen-stains.webp" alt="" width="760" height="1652" decoding="async"></div>
+        <div class="inside-ph f3"><img src="/assets/screen-dashboard.webp" alt="" width="760" height="1652" decoding="async"></div>
+        <div class="inside-ph f4"><img src="/assets/screen-rooms.webp" alt="" width="760" height="1652" decoding="async"></div>
+        <div class="inside-ph f5"><img src="/assets/screen-appliance.webp" alt="" width="760" height="1652" decoding="async"></div>
+    </div>
+
+    <div class="inside-view">
+      <div class="inside-shots">
+        <div class="inside-slide is-on" data-slide="0"><div class="inside-ph"><img src="/assets/screen-dashboard.webp" alt="The elbow dashboard, showing today's tasks and the health of each room" width="760" height="1652" decoding="async"></div></div>
+        <div class="inside-slide" data-slide="1"><div class="inside-ph"><img src="/assets/screen-rooms.webp" alt="A living room task list, grouped into weekly, monthly and seasonal jobs" width="760" height="1652" decoding="async"></div></div>
+        <div class="inside-slide" data-slide="2"><div class="inside-ph"><img src="/assets/screen-appliance.webp" alt="A washing machine care guide with numbered cleaning steps" width="760" height="1652" decoding="async"></div></div>
+        <div class="inside-slide" data-slide="3"><div class="inside-ph"><img src="/assets/screen-stains.webp" alt="The stain guide, with a red wine method and a list of what ruins it" width="760" height="1652" decoding="async"></div></div>
+        <div class="inside-slide" data-slide="4"><div class="inside-ph"><img src="/assets/screen-appliances.webp" alt="A grid of household appliances, each with its cleaning frequency" width="760" height="1652" decoding="async"></div></div>
+      </div>
+      <div class="inside-copies">
+        <div class="inside-slide is-on" data-slide="0"><span class="inside-label">Dashboard</span><h3>Open to a clear plan</h3><p>What's due today, what's slipped, and how each room is holding up — in one glance. Knocked a glass over? The rescue button is right there.</p></div>
+        <div class="inside-slide" data-slide="1"><span class="inside-label">Rooms</span><h3>A rhythm for every room</h3><p>Weekly, monthly and seasonal tasks per space. Tick one off and elbow quietly spaces it out again — no reminders to set, no lists to rewrite.</p></div>
+        <div class="inside-slide" data-slide="2"><span class="inside-label">Appliance care</span><h3>The jobs nobody remembers</h3><p>Filters, seals, descaling. Proper steps, why it matters, and what goes wrong if you skip it — plus a &ldquo;last cleaned&rdquo; date so months stop slipping by.</p></div>
+        <div class="inside-slide" data-slide="3"><span class="inside-label">Stain rescue</span><h3>Before it sets in</h3><p>Filter by surface and stain type for the method that works in the moment — and, just as usefully, the mistakes that make it permanent.</p></div>
+        <div class="inside-slide" data-slide="4"><span class="inside-label">Every appliance</span><h3>Nothing quietly rotting</h3><p>Every appliance in one grid with its own schedule, so the washing machine you last cleaned &ldquo;sometime last year&rdquo; stops being a mystery.</p></div>
+      </div>
+    </div>
+
+    <div class="inside-dots" role="group" aria-label="Choose an app screen">
+      <button class="inside-dot" type="button" aria-current="true" data-i="0" aria-label="Show Dashboard"><span class="fill"></span></button>
+      <button class="inside-dot" type="button" aria-current="false" data-i="1" aria-label="Show Rooms"><span class="fill"></span></button>
+      <button class="inside-dot" type="button" aria-current="false" data-i="2" aria-label="Show Appliance care"><span class="fill"></span></button>
+      <button class="inside-dot" type="button" aria-current="false" data-i="3" aria-label="Show Stain rescue"><span class="fill"></span></button>
+      <button class="inside-dot" type="button" aria-current="false" data-i="4" aria-label="Show Every appliance"><span class="fill"></span></button>
+    </div>
+  </div>
+</section>
 
 <section id="features">
   <div class="wrap">
@@ -291,6 +428,86 @@
     <p class="disc">elbow is an independent app for keeping your home clean and organised. Cleaning and appliance guidance is general in nature — always follow manufacturers' instructions, which take precedence. © 2026 Aga Drapinska-Tonge. All rights reserved.</p>
   </div>
 </footer>
+
+<script>
+/* Inside-the-app viewer: dots, 15s auto-advance, keyboard + hover/focus pause. */
+(function () {
+  var root  = document.getElementById('inside');
+  if (!root) return;
+  var dotsEl = root.querySelector('.inside-dots');
+  var dots   = Array.prototype.slice.call(root.querySelectorAll('.inside-dot'));
+  var slides = Array.prototype.slice.call(root.querySelectorAll('.inside-slide'));
+  if (dots.length < 2) return;
+
+  var DWELL  = 15000;
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
+  var index = 0, timer = null, visible = true;
+  var hoverHeld = false, focusHeld = false;
+
+  function paint(i) {
+    index = i;
+    slides.forEach(function (s) { s.classList.toggle('is-on', +s.dataset.slide === i); });
+    dots.forEach(function (d, n) {
+      d.setAttribute('aria-current', n === i ? 'true' : 'false');
+      if (n === i) {                       // restart the 15s fill from zero
+        var f = d.querySelector('.fill');
+        f.style.animation = 'none'; void f.offsetWidth; f.style.animation = '';
+      }
+    });
+  }
+
+  function stop()  { if (timer) { clearInterval(timer); timer = null; } }
+  function start() {
+    stop();
+    if (reduce.matches || hoverHeld || focusHeld || !visible) return;
+    timer = setInterval(function () { paint((index + 1) % slides.length); }, DWELL);
+  }
+  function sync() {
+    var paused = hoverHeld || focusHeld;
+    dotsEl.setAttribute('data-paused', paused ? 'true' : 'false');
+    paused ? stop() : start();
+  }
+
+  function go(i) { paint(i); sync(); }   // a click restarts the clock on the new slide
+
+  dots.forEach(function (d, n) {
+    d.addEventListener('click', function () { go(n); });
+    d.addEventListener('keydown', function (e) {
+      var next = null;
+      if (e.key === 'ArrowRight') next = (n + 1) % dots.length;
+      if (e.key === 'ArrowLeft')  next = (n - 1 + dots.length) % dots.length;
+      if (next === null) return;
+      e.preventDefault(); dots[next].focus(); go(next);
+    });
+  });
+
+  root.addEventListener('mouseenter', function () { hoverHeld = true;  sync(); });
+  root.addEventListener('mouseleave', function () { hoverHeld = false; sync(); });
+
+  /* Pause for keyboard focus only. A mouse click also focuses the dot, and
+     latching on that would stop the carousel for good the first time it's used. */
+  root.addEventListener('focusin', function (e) {
+    var kb = false;
+    try { kb = e.target.matches(':focus-visible'); } catch (err) { kb = true; }
+    if (kb) { focusHeld = true; sync(); }
+  });
+  root.addEventListener('focusout', function () { focusHeld = false; sync(); });
+
+  /* don't cycle while the section is off-screen */
+  if ('IntersectionObserver' in window) {
+    new IntersectionObserver(function (entries) {
+      visible = entries[0].isIntersecting;
+      visible ? start() : stop();
+    }, { threshold: 0.25 }).observe(root);
+  }
+  document.addEventListener('visibilitychange', function () {
+    document.hidden ? stop() : start();
+  });
+  if (reduce.addEventListener) reduce.addEventListener('change', start);
+
+  start();
+})();
+</script>
 
 </body>
 </html>
