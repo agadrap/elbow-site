@@ -430,7 +430,7 @@
 </footer>
 
 <script>
-/* Inside-the-app viewer: dots, 15s auto-advance, keyboard + hover/focus pause. */
+/* Inside-the-app viewer: dots, 15s auto-advance, keyboard + hover pause. */
 (function () {
   var root  = document.getElementById('inside');
   if (!root) return;
@@ -439,8 +439,7 @@
   var slides = Array.prototype.slice.call(root.querySelectorAll('.inside-slide'));
   if (dots.length < 2) return;
 
-  var DWELL  = 15000;
-  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
+  var DWELL = 15000;
   var index = 0, timer = null, visible = true;
   var hoverHeld = false, focusHeld = false;
 
@@ -449,7 +448,7 @@
     slides.forEach(function (s) { s.classList.toggle('is-on', +s.dataset.slide === i); });
     dots.forEach(function (d, n) {
       d.setAttribute('aria-current', n === i ? 'true' : 'false');
-      if (n === i) {                       // restart the 15s fill from zero
+      if (n === i) {                       // restart the fill sweep from zero
         var f = d.querySelector('.fill');
         f.style.animation = 'none'; void f.offsetWidth; f.style.animation = '';
       }
@@ -459,7 +458,7 @@
   function stop()  { if (timer) { clearInterval(timer); timer = null; } }
   function start() {
     stop();
-    if (reduce.matches || hoverHeld || focusHeld || !visible) return;
+    if (hoverHeld || focusHeld || !visible) return;
     timer = setInterval(function () { paint((index + 1) % slides.length); }, DWELL);
   }
   function sync() {
@@ -481,8 +480,14 @@
     });
   });
 
-  root.addEventListener('mouseenter', function () { hoverHeld = true;  sync(); });
-  root.addEventListener('mouseleave', function () { hoverHeld = false; sync(); });
+  /* Hover-pause is bound to the DOTS only, on purpose. Binding it to the whole
+     section read as tidier but broke the feature outright: #inside is a
+     full-width band taller than the viewport, so a cursor resting anywhere
+     mid-screen -- the normal resting position -- held it paused forever and it
+     never advanced once. The dots are the control surface; hovering them means
+     you intend to drive it yourself. */
+  dotsEl.addEventListener('mouseenter', function () { hoverHeld = true;  sync(); });
+  dotsEl.addEventListener('mouseleave', function () { hoverHeld = false; sync(); });
 
   /* Pause for keyboard focus only. A mouse click also focuses the dot, and
      latching on that would stop the carousel for good the first time it's used. */
@@ -493,18 +498,23 @@
   });
   root.addEventListener('focusout', function () { focusHeld = false; sync(); });
 
-  /* don't cycle while the section is off-screen */
+  /* Don't cycle while off-screen. threshold 0 (any sliver visible), NOT a
+     fraction: the section is taller than the viewport, so its visible *ratio*
+     is capped at viewport/section height and a 0.25 threshold sits close
+     enough to that cap to fail on short windows and on phones. */
   if ('IntersectionObserver' in window) {
     new IntersectionObserver(function (entries) {
       visible = entries[0].isIntersecting;
-      visible ? start() : stop();
-    }, { threshold: 0.25 }).observe(root);
+      sync();
+    }, { threshold: 0 }).observe(root);
   }
   document.addEventListener('visibilitychange', function () {
-    document.hidden ? stop() : start();
+    document.hidden ? stop() : sync();
   });
-  if (reduce.addEventListener) reduce.addEventListener('change', start);
 
+  /* Note: reduced-motion is handled in CSS (instant swap, no fill sweep) rather
+     than by stopping the rotation. The setting is about vestibular triggers from
+     animation, not about content changing -- so the section still advances. */
   start();
 })();
 </script>
