@@ -21,3 +21,9 @@ Desktop.ini
 
 # Node (only if tooling is ever added; site itself has no build step)
 node_modules/
+
+# Apple's App Store badge pack — 112 SVGs across 59 locales. Only the English
+# (US-UK) black lockup is used, copied out to assets/app-store-badge.svg.
+# Kept out of git because assets.directory is "./", so anything committed is
+# served publicly from elbow-app.com.
+assets/Download-on-the-App-Store/

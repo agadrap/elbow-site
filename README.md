@@ -67,6 +67,19 @@ Adding or removing a screen means adding a `.inside-slide` in both `.inside-shot
 `.inside-copies` (matching `data-slide` index) plus one more `.inside-dot`. The script
 picks up the count on its own.
 
+## App Store badge
+
+`index.html` renders `assets/app-store-badge.svg` as the main CTA. That file must be
+**Apple's official artwork**, downloaded from Apple's marketing toolkit
+(<https://developer.apple.com/app-store/marketing/guidelines/> -> "Download on the App
+Store" badge, black, English). Apple requires the supplied badge used unaltered, at a
+minimum height of 40px, with clear space of at least a quarter of its height around it --
+the CSS already reserves that space and renders it at 56px.
+
+If the file is missing, the CTA falls back to the old periwinkle text button rather than
+showing a broken image, so the page never breaks -- but the badge is the standard and
+should be there.
+
 ## Screen captures
 
 The `screen-*.webp` files come from the raw iOS Simulator captures in

@@ -33,6 +33,7 @@
   margin: 0 auto;
   padding: 14px 28px;
   display: flex; align-items: center; gap: 28px;
+  position: relative;          /* anchors the mobile dropdown panel */
 }
 .site-nav .logo {
   font-family: 'Sora', sans-serif;
@@ -128,6 +129,64 @@
 @media (max-width: 760px) {
   .site-nav-in { padding: 12px 20px; gap: 16px; }
   .site-footer-in { padding: 0 20px; }
+}
+
+/* ---------------------------------------------------------------------------
+   MOBILE MENU — scoped to .site-nav.has-menu so the sub-pages (Back / logo /
+   Support, which already fit) are untouched. Without this the landing nav
+   measured ~455px at a 390px viewport and the "Get elbow" CTA was cut off.
+   --------------------------------------------------------------------------- */
+.site-nav .nav-links { display: flex; align-items: center; gap: 10px; }
+
+.nav-toggle {
+  display: none;
+  width: 42px; height: 38px; padding: 0;
+  align-items: center; justify-content: center;
+  background: transparent; border: 1px solid var(--line-strong);
+  border-radius: 11px; cursor: pointer; color: var(--text);
+  transition: border-color .2s, background-color .2s;
+}
+.nav-toggle:hover { border-color: var(--peri); background: rgba(143, 168, 255, .08); }
+.nav-toggle .bars { display: block; width: 18px; height: 12px; position: relative; }
+.nav-toggle .bars i {
+  position: absolute; left: 0; width: 100%; height: 2px; border-radius: 2px;
+  background: currentColor; transition: transform .22s ease, opacity .16s ease;
+}
+.nav-toggle .bars i:nth-child(1) { top: 0; }
+.nav-toggle .bars i:nth-child(2) { top: 5px; }
+.nav-toggle .bars i:nth-child(3) { top: 10px; }
+.nav-toggle[aria-expanded="true"] .bars i:nth-child(1) { transform: translateY(5px) rotate(45deg); }
+.nav-toggle[aria-expanded="true"] .bars i:nth-child(2) { opacity: 0; }
+.nav-toggle[aria-expanded="true"] .bars i:nth-child(3) { transform: translateY(-5px) rotate(-45deg); }
+
+@media (max-width: 700px) {
+  .site-nav.has-menu .nav-toggle { display: inline-flex; }
+
+  .site-nav.has-menu .nav-links {
+    position: absolute; top: 100%; left: 0; right: 0;
+    flex-direction: column; align-items: stretch; gap: 8px;
+    padding: 14px 20px 20px;
+    /* Solid, not translucent: at 97% the hero heading still ghosted through
+       behind the links. A menu panel has no reason to be see-through. */
+    background: var(--bg);
+    border-bottom: 1px solid var(--line);
+    z-index: 1;
+    box-shadow: 0 18px 40px rgba(0, 0, 0, .45);
+    opacity: 0; visibility: hidden; transform: translateY(-8px);
+    transition: opacity .2s ease, transform .2s ease, visibility .2s;
+  }
+  .site-nav.has-menu.is-open .nav-links { opacity: 1; visibility: visible; transform: none; }
+
+  /* full-width rows in the panel, so nothing can overflow the way it did before */
+  .site-nav.has-menu .nav-links .btn {
+    justify-content: center; width: 100%;
+    padding: 13px 18px; font-size: 15px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nav-toggle .bars i,
+  .site-nav.has-menu .nav-links { transition: none; }
 }
 
 /* SUBPAGE (legal/support) shared layout */
